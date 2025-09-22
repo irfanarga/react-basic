@@ -10,6 +10,7 @@ export default defineConfig({
         main: "index.html",
         hello: "hello-world.html",
         contact: "contact.html",
+        task: "task.html",
       },
     },
   },
