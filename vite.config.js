@@ -15,6 +15,7 @@ export default defineConfig({
         note: "note.html",
         profile: "profile.html",
         timer: "timer.html",
+        guestbook: "guestbook.html",
       },
     },
   },
