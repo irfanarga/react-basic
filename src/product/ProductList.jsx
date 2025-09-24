@@ -1,27 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Product from "./Product.jsx";
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
-  const loaded = useRef(false);
+  const [load, setLoad] = useState(false);
+
+  function handleClick() {
+    setLoad(true);
+  }
 
   useEffect(() => {
     console.log("Call Use Effect");
-    if (loaded.current === false) {
+    if (load) {
       fetch("/product.json")
         .then((response) => response.json())
-        .then((data) => setProducts(data))
-        .then(() => (loaded.current = true));
+        .then((data) => setProducts(data));
     }
 
     return () => {
       console.log("Product List Unmount");
     };
-  });
+  }, [load]);
 
   return (
     <div>
       <h1>Product List</h1>
+      <button onClick={handleClick}>Load Product</button>
       {products.map((product) => (
         <Product key={product.id} product={product} />
       ))}
