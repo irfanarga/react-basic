@@ -10,11 +10,20 @@ export default function ProductList() {
   }
 
   useEffect(() => {
+    console.log("Call use effect with []");
+  }, []);
+
+  useEffect(() => {
     console.log("Call Use Effect");
+
+    async function fetchProducts() {
+      const response = await fetch("/product.json");
+      const data = await response.json();
+      setProducts(data);
+    }
+
     if (load) {
-      fetch("/product.json")
-        .then((response) => response.json())
-        .then((data) => setProducts(data));
+      fetchProducts();
     }
 
     return () => {
